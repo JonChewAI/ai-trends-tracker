@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Trends 2026 - Market Share & Usage Tracker | AI Minimalist</title>
+  <meta name="description" content="AI trends and market share tracker for 2026. Monthly web traffic data for ChatGPT, Gemini, DeepSeek, Perplexity AI Search, Grok, Claude and Copilot. The only AI trends dashboard you need - by AI Minimalist." />
+  <meta name="author" content="Jonathan Chew" />
+  <link rel="author" href="https://www.linkedin.com/in/jonathanchew/" />
+  <meta name="keywords" content="AI trends 2026, AI market share, AI search market share, AI Minimalist, ChatGPT market share, Gemini market share, Perplexity AI search, DeepSeek, AI usage statistics, AI trends tracker, generative AI market, AI platform comparison, AI web traffic data, monthly AI report" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ai-trends.ai-minimalist.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="AI Trends 2026 - Market Share & Usage Tracker | AI Minimalist" />
+  <meta property="og:description" content="The definitive AI trends tracker for 2026. Monthly market share and usage data for ChatGPT, Gemini, Perplexity, DeepSeek, Grok, Claude and more. Updated monthly by AI Minimalist." />
+  <meta property="og:url" content="https://ai-trends.ai-minimalist.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AI Minimalist" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Trends 2026 - Market Share & Usage Tracker | AI Minimalist" />
+  <meta name="twitter:description" content="The definitive AI trends tracker. Monthly market share data for ChatGPT, Gemini, Perplexity, DeepSeek and more. By AI Minimalist." />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #ffffff;
+      color: #1a1a1a;
+      font-family: 'Montserrat', -apple-system, system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    a { color: #1a1a1a; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ---- HEADER BAR ---- */
+    .site-header {
+      background: #ffffff;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+    }
+    .site-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: -0.5px;
+    }
+    .site-header .subtitle-text {
+      color: rgba(0,0,0,0.5);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+    .home-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: #fff;
+      color: #000;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+    .home-btn:hover { border-color: #000; background: rgba(0,0,0,0.02); text-decoration: none; }
+
+    /* ---- WRAPPER ---- */
+    .wrapper { max-width: 1000px; margin: 0 auto; padding: 0 24px 60px; }
+
+    /* ---- HERO SECTION ---- */
+    .hero {
+      text-align: center;
+      padding: 56px 0 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      margin-bottom: 40px;
+    }
+    .hero-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #000;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.2);
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 40px;
+      font-weight: 800;
+      color: #000;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    .hero .hero-sub {
+      font-size: 17px;
+      color: rgba(0,0,0,0.55);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+    .hero .data-range {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 1px;
+    }
+
+    /* ---- CTA BANNER ---- */
+    .cta-banner {
+      background: #fff;
+      color: #1a1a1a;
+      padding: 20px 0;
+      margin-bottom: 36px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .cta-banner .cta-text {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(0,0,0,0.55);
+    }
+    .cta-banner .cta-text a {
+      color: #000;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      padding-bottom: 1px;
+    }
+    .cta-banner .cta-text a:hover { text-decoration: none; border-bottom-color: #000; }
+
+    /* ---- TABS ---- */
+    .tabs { display: flex; gap: 4px; margin-bottom: 28px; flex-wrap: wrap; }
+    .tab-btn {
+      background: #fff;
+      color: rgba(0,0,0,0.45);
+      border: 1px solid rgba(0,0,0,0.15);
+      border-radius: 0;
+      padding: 8px 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: all 0.15s;
+    }
+    .tab-btn:hover { border-color: rgba(0,0,0,0.4); color: #000; }
+    .tab-btn.active { background: #fff; color: #000; border-color: #000; }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ---- CHART ---- */
+    .chart-block {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 24px 16px 16px;
+      margin-bottom: 24px;
+    }
+    canvas { width: 100% !important; }
+
+    /* ---- TABLE ---- */
+    .data-table-wrap {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.1);
+      overflow-x: auto;
+      margin-bottom: 24px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'JetBrains Mono', monospace; }
+    thead tr { border-bottom: 2px solid #000; }
+    th {
+      padding: 14px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.5);
+      text-align: right;
+      white-space: nowrap;
+    }
+    th:first-child { text-align: left; padding-left: 16px; color: #000; }
+    th:last-child { padding-right: 16px; color: #000; }
+    tbody tr { border-bottom: 1px solid rgba(0,0,0,0.06); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(0,0,0,0.02); }
+    td { padding: 12px 12px; color: #333; text-align: right; white-space: nowrap; }
+    td:first-child { text-align: left; padding-left: 16px; }
+    td:last-child { padding-right: 16px; }
+
+    .provider-cell { display: flex; align-items: center; gap: 10px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .provider-name { color: #000; font-weight: 600; }
+
+    .badge { font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 0; }
+    .badge.pos { color: #16a34a; background: rgba(22,163,74,0.08); }
+    .badge.neg { color: #dc2626; background: rgba(220,38,38,0.08); }
+
+    /* ---- SCORECARDS ---- */
+    .scorecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .card { background: #fff; border: 1px solid rgba(0,0,0,0.1); padding: 20px 24px; }
+    .card-label { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .card-label span.dot { width: 8px; height: 8px; }
+    .card-label .name { font-size: 13px; color: rgba(0,0,0,0.5); font-weight: 500; }
+    .card-value { font-size: 28px; font-weight: 800; color: #000; line-height: 1; letter-spacing: -1px; }
+    .card-delta { margin-top: 8px; }
+    .card-delta .vs { font-size: 11px; color: rgba(0,0,0,0.35); margin-left: 6px; }
+
+    .combined-note { font-size: 13px; color: rgba(0,0,0,0.5); margin-bottom: 16px; }
+
+    /* ---- NEWSLETTER SECTION ---- */
+    .newsletter-section {
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding: 40px 0;
+      margin: 40px 0 0;
+    }
+    .newsletter-section h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    .newsletter-section .newsletter-intro {
+      font-size: 15px;
+      color: rgba(0,0,0,0.5);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+    .newsletter-issues {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .newsletter-issue {
+      border: 1px solid rgba(0,0,0,0.12);
+      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: border-color 0.15s;
+    }
+    .newsletter-issue:hover { border-color: rgba(0,0,0,0.3); }
+    .issue-content { flex: 1; }
+    .issue-date {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 6px;
+    }
+    .issue-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #000;
+      margin-bottom: 6px;
+    }
+    .issue-desc {
+      font-size: 13px;
+      color: rgba(0,0,0,0.5);
+      line-height: 1.6;
+    }
+    .issue-link {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      border: 1px solid rgba(0,0,0,0.2);
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .issue-link:hover { border-color: #000; background: rgba(0,0,0,0.02); text-decoration: none; }
+
+    /* ---- DISCLAIMER ---- */
+    .disclaimer {
+      background: rgba(0,0,0,0.03);
+      border-left: 3px solid #000;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .disclaimer-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #000;
+      margin-bottom: 8px;
+    }
+    .disclaimer p {
+      font-size: 13px;
+      color: rgba(0,0,0,0.55);
+      line-height: 1.7;
+    }
+
+    /* ---- FOOTER ---- */
+    .footer {
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 24px;
+      margin-top: 12px;
+    }
+    .footer-source {
+      font-size: 11px;
+      color: rgba(0,0,0,0.4);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .footer-source strong { color: #000; }
+    .footer-credit {
+      font-size: 12px;
+      color: rgba(0,0,0,0.4);
+      line-height: 1.8;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 12px;
+    }
+    .footer-credit a { color: #000; font-weight: 600; border-bottom: 1px solid rgba(0,0,0,0.2); padding-bottom: 1px; }
+    .footer-credit a:hover { text-decoration: none; border-bottom-color: #000; }
+    .sep { color: rgba(0,0,0,0.2); }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 640px) {
+      .hero h2 { font-size: 28px; }
+      .hero .hero-sub { font-size: 15px; }
+      .site-header h1 { font-size: 18px; }
+      .site-header .subtitle-text { display: none; }
+      .newsletter-issue { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Site Header -->
+<header class="site-header">
+  <div>
+    <h1>AI TRENDS TRACKER</h1>
+    <p class="subtitle-text">Market share and usage data for every major AI platform - updated monthly</p>
+  </div>
+  <a class="home-btn" href="https://www.ai-minimalist.com/" rel="noopener">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+    <span>Home</span>
+  </a>
+</header>
+
+<div class="wrapper">
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="hero-badge">Updated Monthly</span>
+    <h2>The Only AI Trends<br/>Dashboard You Need</h2>
+    <p class="hero-sub">
+      Track how the world uses AI - from ChatGPT and Gemini to AI search tools like Perplexity and coding assistants like Copilot. One page, every platform, updated monthly.
+    </p>
+    <span class="data-range">SIMILARWEB DATA - JAN 2025 TO JAN 2026</span>
+  </div>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner">
+    <p class="cta-text">
+      This page tracks the raw numbers. For the trends, news, and shifts behind them - <a href="https://www.linkedin.com/newsletters/the-ai-insider-7100682052768841728/" target="_blank" rel="noopener">The AI Insider</a> covers what's actually happening in AI each month.
+    </p>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('share')">Market Share</button>
+    <button class="tab-btn" onclick="switchTab('usage')">Usage (MAU)</button>
+    <button class="tab-btn" onclick="switchTab('combined')">Combined Table</button>
+  </div>
+
+  <!-- Panel: Market Share -->
+  <div id="panel-share" class="panel active">
+    <div class="chart-block"><canvas id="chart-share" height="320"></canvas></div>
+    <div class="data-table-wrap" id="table-share"></div>
+    <div class="scorecards" id="cards-share"></div>
+  </div>
+
+  <!-- Panel: Usage -->
+  <div id="panel-usage" class="panel">
+    <div class="chart-block"><canvas id="chart-usage" height="320"></canvas></div>
+    <div class="data-table-wrap" id="table-usage"></div>
+    <div class="scorecards" id="cards-usage"></div>
+  </div>
+
+  <!-- Panel: Combined -->
+  <div id="panel-combined" class="panel">
+    <p class="combined-note">Snapshot as of Jan 2026 - market share vs. estimated monthly active users across all major AI platforms (web only).</p>
+    <div class="data-table-wrap" id="table-combined"></div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <div class="disclaimer-title">Data Methodology & Disclaimer</div>
+    <p>
+      All data is sourced from SimilarWeb's Global Gen AI Tracker and reflects <strong>web browser traffic only</strong>.
+      This data does not include desktop application usage (e.g. Claude Desktop, ChatGPT desktop app),
+      mobile-native app traffic, API calls, or AI embedded within other products. MAU (Monthly Active Users)
+      figures are estimates based on web traffic modeling. Actual total usage across all platforms will be
+      significantly higher than what is shown here.
+    </p>
+  </div>
+
+  <!-- Newsletter Section -->
+  <div class="newsletter-section">
+    <h3>The AI Insider</h3>
+    <p class="newsletter-intro">
+      The monthly newsletter that explains what's driving these numbers - product launches, policy shifts, and what it means for your business.
+    </p>
+    <div class="newsletter-issues">
+      <div class="newsletter-issue">
+        <div class="issue-content">
+          <div class="issue-date">February 2026</div>
+          <div class="issue-title">The month AI went to war</div>
+          <p class="issue-desc">The Pentagon gave Anthropic 3 days to greenlight Claude for weapons. They said no. OpenAI signed the deal instead. Plus: 4K video AI from Kuaishou, Grok 4.2's multi-agent architecture, Opus 4.6 breaking the 1M-token barrier, and a Copilot security bug that read restricted NHS emails for four weeks.</p>
+        </div>
+        <a class="issue-link" href="https://www.linkedin.com/pulse/ai-insider-february-2026-jonathan-chew-ai-minimalist-eacdc/?trackingId=TrtacRJwS1Si1Srz0me2BQ%3D%3D" target="_blank" rel="noopener">Read</a>
+      </div>
+      <div class="newsletter-issue">
+        <div class="issue-content">
+          <div class="issue-date">January 2026</div>
+          <div class="issue-title">The month AI stopped feeling like a tool</div>
+          <p class="issue-desc">Claude Cowork launched and put AI on the org chart. The Clawdbot autonomous agent went viral and lost control of its own narrative. Higgsfield AI hit a $1.3B valuation. Generative video went from demo reel to production pipeline - and the market started pricing infrastructure over hype.</p>
+        </div>
+        <a class="issue-link" href="https://www.linkedin.com/pulse/ai-insider-january-2026-jonathan-chew-ai-minimalist-sretc/" target="_blank" rel="noopener">Read</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p class="footer-source">
+      <strong>SOURCE:</strong> SimilarWeb Global Generative AI Tracker (Jan 2025 - Jan 2026).
+      Web traffic only - excludes desktop apps, mobile-native, API, and embedded AI usage. MAU figures are estimates.
+    </p>
+    <div class="footer-credit">
+      <span>Created by <a href="https://www.linkedin.com/in/jonathanchew/" target="_blank" rel="noopener">Jonathan Chew</a></span>
+      <span class="sep">|</span>
+      <span>&copy; 2026 AI Minimalist. All Rights Reserved.</span>
+      <span class="sep">|</span>
+      <a href="https://www.ai-minimalist.com" target="_blank" rel="noopener">www.ai-minimalist.com</a>
+      <span class="sep">|</span>
+      <a href="https://www.brandrev.ai" target="_blank" rel="noopener">www.brandrev.ai</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const LABELS = ["Jan 2025", "Jul 2025", "Oct 2025", "Dec 2025", "Jan 2026"];
+const PROVIDERS = ["ChatGPT", "Gemini", "DeepSeek", "Grok", "Perplexity", "Claude", "Copilot"];
+const COLORS = {
+  ChatGPT: "#10A37F", Gemini: "#4285F4", DeepSeek: "#FF6B35",
+  Grok: "#1DA1F2", Perplexity: "#20B2AA", Claude: "#D97706",
+  Copilot: "#7C3AED", Other: "#6B7280"
+};
+
+const shareData = {
+  ChatGPT:    [86.7, 78.6, 74.1, 68.0, 64.5],
+  Gemini:     [5.7,  8.6, 12.9, 18.2, 21.5],
+  DeepSeek:   [0.3,  4.8,  4.2,  3.9,  3.7],
+  Grok:       [1.1,  1.9,  2.5,  2.9,  3.4],
+  Perplexity: [1.5,  1.7,  1.9,  2.1,  2.0],
+  Claude:     [1.8,  1.9,  2.0,  2.0,  2.0],
+  Copilot:    [1.5,  1.3,  1.2,  1.2,  1.1],
+};
+
+const usageData = {
+  ChatGPT:    [3800, 4420, 4750, 4980, 5100],
+  Gemini:     [250,  484,  827, 1332, 1699],
+  DeepSeek:   [13,   270,  269,  285,  292],
+  Grok:       [48,   107,  160,  212,  269],
+  Perplexity: [66,    96,  122,  154,  158],
+  Claude:     [79,   107,  128,  146,  158],
+  Copilot:    [66,    73,   77,   88,   87],
+};
+
+const HIGHLIGHT = ["ChatGPT", "Gemini", "Grok", "DeepSeek"];
+
+function hexToRgba(hex, alpha) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+function buildChart(canvasId, data, isUsage) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  const datasets = PROVIDERS.map(p => ({
+    label: p,
+    data: data[p],
+    borderColor: COLORS[p],
+    backgroundColor: hexToRgba(COLORS[p], 0.06),
+    fill: true,
+    tension: 0.4,
+    borderWidth: (p === "ChatGPT" || p === "Gemini") ? 3 : 1.5,
+    pointBackgroundColor: COLORS[p],
+    pointBorderColor: '#fff',
+    pointBorderWidth: 2,
+    pointRadius: 5,
+    pointHoverRadius: 7,
+  }));
+
+  new Chart(ctx, {
+    type: 'line',
+    data: { labels: LABELS, datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            color: 'rgba(0,0,0,0.5)',
+            font: { family: "'Montserrat', sans-serif", size: 12, weight: '500' },
+            usePointStyle: true,
+            pointStyle: 'circle',
+            boxWidth: 8,
+            boxHeight: 8,
+            padding: 20
+          }
+        },
+        tooltip: {
+          backgroundColor: '#000',
+          borderColor: 'rgba(0,0,0,0.1)',
+          borderWidth: 1,
+          titleColor: '#fff',
+          bodyColor: 'rgba(255,255,255,0.8)',
+          titleFont: { family: "'Montserrat', sans-serif", size: 13, weight: 'bold' },
+          bodyFont: { family: "'JetBrains Mono', monospace", size: 12 },
+          padding: 14,
+          cornerRadius: 0,
+          callbacks: {
+            label: ctx => ` ${ctx.dataset.label}: ${isUsage ? ctx.parsed.y.toLocaleString() + 'M' : ctx.parsed.y + '%'}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { color: 'rgba(0,0,0,0.4)', font: { family: "'Montserrat', sans-serif", size: 12 } }
+        },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: {
+            color: 'rgba(0,0,0,0.4)',
+            font: { family: "'JetBrains Mono', monospace", size: 12 },
+            callback: v => isUsage ? `${v}M` : `${v}%`
+          }
+        }
+      }
+    }
+  });
+}
+
+function badge(val, isUsage) {
+  const pos = val >= 0;
+  const cls = pos ? 'pos' : 'neg';
+  const sign = pos ? '+' : '';
+  const display = isUsage ? `${sign}${val.toLocaleString()}M` : `${sign}${val.toFixed(1)}pp`;
+  return `<span class="badge ${cls}">${display}</span>`;
+}
+
+function buildTable(containerId, data, isUsage) {
+  const first = 0, last = LABELS.length - 1;
+  let html = '<table><thead><tr>';
+  html += '<th>Provider</th>';
+  LABELS.forEach(l => html += `<th>${l}</th>`);
+  html += '<th>YoY Change</th></tr></thead><tbody>';
+  PROVIDERS.forEach(p => {
+    const delta = data[p][last] - data[p][first];
+    html += `<tr><td><div class="provider-cell"><span class="dot" style="background:${COLORS[p]}"></span><span class="provider-name">${p}</span></div></td>`;
+    data[p].forEach(v => html += `<td>${isUsage ? v.toLocaleString() + 'M' : v + '%'}</td>`);
+    html += `<td>${badge(delta, isUsage)}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById(containerId).innerHTML = html;
+}
+
+function buildCards(containerId, data, isUsage) {
+  const first = 0, last = LABELS.length - 1;
+  let html = '';
+  HIGHLIGHT.forEach(p => {
+    const val = data[p][last];
+    const delta = val - data[p][first];
+    html += `<div class="card">
+      <div class="card-label"><span class="dot" style="background:${COLORS[p]}"></span><span class="name">${p}</span></div>
+      <div class="card-value">${isUsage ? val.toLocaleString() + 'M' : val + '%'}</div>
+      <div class="card-delta">${badge(delta, isUsage)}<span class="vs">vs Jan 2025</span></div>
+    </div>`;
+  });
+  document.getElementById(containerId).innerHTML = html;
+}
+
+function buildCombined() {
+  const last = LABELS.length - 1, first = 0;
+  let html = `<table><thead><tr>
+    <th>Provider</th>
+    <th>Share Jan '26</th><th>Share YoY Change</th>
+    <th>MAU Jan '26</th><th>MAU YoY Change</th>
+  </tr></thead><tbody>`;
+  PROVIDERS.forEach(p => {
+    const sd = shareData[p][last] - shareData[p][first];
+    const ud = usageData[p][last] - usageData[p][first];
+    html += `<tr>
+      <td><div class="provider-cell"><span class="dot" style="background:${COLORS[p]}"></span><span class="provider-name">${p}</span></div></td>
+      <td>${shareData[p][last]}%</td><td>${badge(sd, false)}</td>
+      <td>${usageData[p][last].toLocaleString()}M</td><td>${badge(ud, true)}</td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  document.getElementById('table-combined').innerHTML = html;
+}
+
+function switchTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// Init
+buildChart('chart-share', shareData, false);
+buildTable('table-share', shareData, false);
+buildCards('cards-share', shareData, false);
+
+buildChart('chart-usage', usageData, true);
+buildTable('table-usage', usageData, true);
+buildCards('cards-usage', usageData, true);
+
+buildCombined();
+</script>
+</body>
+</html>
